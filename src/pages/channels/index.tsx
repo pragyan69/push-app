@@ -157,7 +157,7 @@ const ChannelsPage = () => {
       testGetChannelByAddress();
       testGetSubscribers();
     }
-  }, [subscriberStatus]);
+  }, [testGetChannelByAddress,testGetSubscribers,subscriberStatus]);
 
   // console.log('LOG: --> ', { env, isCAIP });
 

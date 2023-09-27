@@ -54,14 +54,40 @@ const NotificationsTest = () => {
       setLoading(true);
       const feeds = await PushAPI.user.getFeeds({
         user: isCAIP ? getCAIPAddress(env, account) : account,
-        // user: isCAIP ? getCAIPAddress(env, devWorkingAddress) : devWorkingAddress,
+        //user: isCAIP ? getCAIPAddress(env, devWorkingAddress) : devWorkingAddress,
         limit: 30,
         env: env
       });
 
-      console.log('feeds: ', feeds);
+      // api 
 
-      setNotifs(feeds);
+      const apiResponse = await PushAPI.user.getFeeds({
+        user: 'eip155:42:0xD8634C39BBFd4033c0d3289C4515275102423681', // user address
+        raw: true,
+        env: 'staging'
+      });
+      // parse it to get a specific shape of object.
+      const parsedResults = PushAPI.utils.parseApiResponse(apiResponse);
+      
+      const [oneNotification] = parsedResults;
+      const {
+        cta,
+        title,
+        message,
+        app,
+        icon,
+        image,
+        url,
+        blockchain,
+        secret,
+        notification
+      } = oneNotification;
+
+      // end
+
+      console.log('feeds: ', apiResponse);
+
+      setNotifs(apiResponse);
 
     } catch (e) {
       console.error(e);
@@ -112,7 +138,7 @@ const NotificationsTest = () => {
   return (
       <div>
         <Header>
-          <h2>Notifications Test page</h2>
+          <h2>Notifications Page</h2>
 
           {/* <TestModal /> */}
           

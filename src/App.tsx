@@ -126,7 +126,7 @@ export function App() {
     <StyledApp>
       <Link to="/" className='homeLink'>
         <PushLogo style={{ marginRight: 12 }}/>
-        <h1>SDK Starter Kit App</h1>
+        <h1></h1>
       </Link>
 
       <ConnectButton />
